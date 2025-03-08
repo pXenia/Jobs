@@ -23,3 +23,4 @@ rootProject.name = "Jobs"
 include(":app")
 include(":core-ui")
 include(":feature-main")
+include(":feature-favorites")

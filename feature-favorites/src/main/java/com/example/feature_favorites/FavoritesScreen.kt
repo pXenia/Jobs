@@ -1,6 +1,5 @@
-package com.example.feature_main
+package com.example.feature_favorites
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,32 +10,26 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.core_ui.BottomNavigationBar
 import com.example.core_ui.FloatingButton
 import com.example.core_ui.JobCard
+import com.example.core_ui.R
 import com.example.core_ui.RecommendationCard
 import com.example.core_ui.Search
 import com.example.core_ui.SearchBar
 
-@Preview(showSystemUi = true)
+
 @Composable
-fun MainScreen() {
+fun FavoritesScreen() {
     Surface(
         color = MaterialTheme.colorScheme.background
     ) {
@@ -50,33 +43,17 @@ fun MainScreen() {
         ) {
 
             Search(
-                iconSettings = com.example.core_ui.R.drawable.ic_filter_default,
-                iconSearch = com.example.core_ui.R.drawable.ic_search_default
+                iconSettings = R.drawable.ic_filter_default,
+                iconSearch = R.drawable.ic_search_default
             )
 
-            LazyRow(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(3) {
-                    RecommendationCard(
-                        title = "ffkfkf",
-                        icon = com.example.core_ui.R.drawable.ic_location_default
-                    ) { }
-                }
-            }
+            FavoritesSort()
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = "Вакансии для вас",
-                color = MaterialTheme.colorScheme.onPrimary,
-                style = MaterialTheme.typography.titleMedium
-            )
+            Spacer(modifier = Modifier.height(9.dp))
 
             LazyColumn(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(3) { vacancy ->
                     JobCard(
@@ -91,8 +68,6 @@ fun MainScreen() {
                 }
             }
 
-            LoadMoreButton()
-
             BottomNavigationBar(
                 selectedItem = 0,
                 onItemSelected = {}
@@ -101,19 +76,30 @@ fun MainScreen() {
     }
 }
 
-
 @Composable
-fun LoadMoreButton() {
-    Button(
-        onClick = { },
+private fun FavoritesSort(){
+    Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp),
-        shape = RoundedCornerShape(8.dp),
-        colors = ButtonDefaults.buttonColors(
-            MaterialTheme.colorScheme.onSecondaryContainer
-        )
+            .fillMaxWidth(),
     ) {
-        Text(text = "Еще 143 вакансии", color = MaterialTheme.colorScheme.onPrimary)
+        Text(
+            text = "145 dfrfycbq",
+            modifier = Modifier.weight(1f),
+            color = MaterialTheme.colorScheme.onPrimary,
+            style = MaterialTheme.typography.bodyMedium
+        )
+
+        Text(
+            text = " dfrfycbq",
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            style = MaterialTheme.typography.bodyMedium
+        )
+
+        Icon(
+            painter = painterResource(R.drawable.ic_sort_default),
+            contentDescription = "",
+            modifier = Modifier.size(16.dp),
+            tint = MaterialTheme.colorScheme.onSecondaryContainer
+        )
     }
 }

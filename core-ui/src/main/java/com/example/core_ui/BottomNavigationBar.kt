@@ -80,7 +80,7 @@ fun BottomNavItem(
                 painter = painterResource(id = iconId),
                 contentDescription = label,
                 tint = if (isSelected) {
-                    MaterialTheme.colorScheme.secondaryContainer
+                    MaterialTheme.colorScheme.onSecondaryContainer
                 } else MaterialTheme.colorScheme.outline,
             )
             if (showBadge) {
@@ -102,7 +102,7 @@ fun BottomNavItem(
         Text(
             text = label,
             color = if (isSelected) {
-                MaterialTheme.colorScheme.secondaryContainer
+                MaterialTheme.colorScheme.onSecondaryContainer
             } else MaterialTheme.colorScheme.outline,
             style = MaterialTheme.typography.labelSmall
         )
