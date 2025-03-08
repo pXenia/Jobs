@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.core_ui.JobCard
 import com.example.core_ui.RecommendationCard
+import com.example.feature_main.MainScreen
 import com.example.jobs.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
+                MainScreen()
             }
         }
     }

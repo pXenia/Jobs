@@ -3,8 +3,12 @@ package com.example.core_ui
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,11 +23,11 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SearchBar(
     modifier: Modifier,
-    isMoreInfo: Boolean // иконка поиска или стрелка назад
+    icon: Int
 ) {
     var text by remember { mutableStateOf("") }
 
-    TextField(
+    OutlinedTextField(
         value = text,
         onValueChange = { text = it },
         modifier = modifier,
@@ -36,13 +40,16 @@ fun SearchBar(
         },
         leadingIcon = {
             Icon(
-                painter = if (isMoreInfo) painterResource(id = R.drawable.ic_arrow_default)
-                else painterResource(
-                    id = R.drawable.ic_search_default
-                ),
+                painter = painterResource(icon),
                 contentDescription = "",
             )
         },
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedContainerColor = MaterialTheme.colorScheme.surface,
+            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+            focusedBorderColor = MaterialTheme.colorScheme.surface,
+            unfocusedBorderColor = MaterialTheme.colorScheme.surface
+        )
     )
 }
