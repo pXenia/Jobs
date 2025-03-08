@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -115,11 +116,24 @@ private fun JobInfo(
         }
         Text(
             text = datePublication,
+            color = MaterialTheme.colorScheme.inversePrimary,
             style = MaterialTheme.typography.bodyMedium
         )
     }
 }
 
-
+@Preview
+@Composable
+fun JobCardPreview() {
+    JobCard(
+        modifier = Modifier,
+        numberViewers = "Сейчас просматривает 1 человек",
+        jobTitle = "UI/UX Designer",
+        cities = listOf("Минск", "Мобирикс"),
+        experience = "Опыт от 1 года до 3 лет",
+        datePublication = "Опубликовано 20 февраля",
+        isFavourite = true
+    )
+}
 
 
