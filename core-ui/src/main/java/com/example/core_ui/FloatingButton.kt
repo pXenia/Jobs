@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.core_ui.tools.Dimens
 
 
 @Composable
@@ -23,14 +24,14 @@ fun FloatingButton(
     FloatingActionButton(
         onClick = onClick,
         modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(Dimens.cornerRadius8dp),
         containerColor = MaterialTheme.colorScheme.surface,
         elevation = FloatingActionButtonDefaults.elevation(0.dp)
     ) {
         Icon(
             painter = painterResource(icon),
             contentDescription = "",
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(Dimens.iconSize24dp)
         )
     }
 }

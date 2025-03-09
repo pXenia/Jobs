@@ -1,36 +1,38 @@
 package com.example.core_network.repository
 
+import android.util.Log
 import com.example.core_network.GoogleDriveApi
+import com.example.core_network.model.JobResponse
 import com.example.core_network.model.Offer
 import com.example.core_network.model.Vacancy
 import javax.inject.Inject
 
+
 class GoogleDriveApiRepository @Inject constructor(
     private val api: GoogleDriveApi
 ) {
-    suspend fun loadVacancy(): List<Vacancy> {
+    private suspend fun loadJobResponse(): JobResponse? {
         return try {
             val response = api.downloadFile(fileId = "1z4TbeDkbfXkvgpoJprXbN85uCcD7f00r")
             if (response.isSuccessful) {
-                response.body()?.vacancies ?: emptyList()
+                Log.d("API", response.body().toString())
+                response.body()
             } else {
-                emptyList()
+                Log.e("API", "Code: ${response.code()}, Message: ${response.errorBody()?.string()}")
+                null
             }
         } catch (e: Exception) {
-            emptyList()
+            Log.e("API", e.toString())
+            null
         }
     }
 
+
+    suspend fun loadVacancies(): List<Vacancy> {
+        return loadJobResponse()?.vacancies ?: emptyList()
+    }
+
     suspend fun loadOffers(): List<Offer> {
-        return try {
-            val response = api.downloadFile(fileId = "1z4TbeDkbfXkvgpoJprXbN85uCcD7f00r")
-            if (response.isSuccessful) {
-                response.body()?.offers ?: emptyList()
-            } else {
-                emptyList()
-            }
-        } catch (e: Exception) {
-            emptyList()
-        }
+        return loadJobResponse()?.offers ?: emptyList()
     }
 }

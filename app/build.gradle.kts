@@ -57,7 +57,7 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":feature-main"))
     implementation(project(":feature-favorites"))
-    implementation(project(":core-network"))
+    implementation(project(":core-db"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -76,13 +76,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //Для управлнеия системной панелью
-    implementation (libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.systemuicontroller)
 
     //Для навигации
-    implementation (libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
 
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.dagger.compiler)
     ksp(libs.hilt.compiler)
 

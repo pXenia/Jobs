@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.jetbrainsKotlinKsp)
     alias(libs.plugins.hiltPlugin)
 }
@@ -47,7 +46,7 @@ dependencies {
     // для загрузки данных
     implementation(libs.retrofit)
     implementation(libs.moshi.kotlin)
-    implementation (libs.converter.moshi)
+    implementation(libs.converter.moshi)
 
     // Hilt
     implementation(libs.hilt.android)

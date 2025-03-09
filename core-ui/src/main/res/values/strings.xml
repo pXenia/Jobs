@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="position_keywords">Должность, ключевые слова</string>
+    <string name="respond">Откликнуться</string>
+    <string name="not_salary">Уровень дохода не указан</string>
 </resources>
