@@ -17,7 +17,9 @@ import com.example.jobs.navigation.AppNavHost
 import com.example.jobs.navigation.getSelectedIndex
 import com.example.jobs.navigation.navigateToScreen
 import com.example.jobs.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
