@@ -46,7 +46,7 @@ fun FavoritesScreen(
     Surface(
         color = MaterialTheme.colorScheme.background
     ) {
-        Spacer(modifier = Modifier.height(Dimens.padding32dp))
+        Spacer(modifier = Modifier.height(Dimens.padding64dp))
 
         Column(
             modifier = Modifier
@@ -55,8 +55,25 @@ fun FavoritesScreen(
             verticalArrangement = Arrangement.spacedBy(Dimens.padding16dp)
         ) {
 
-            Spacer(modifier = Modifier.height(Dimens.padding8dp))
+            Spacer(modifier = Modifier.height(Dimens.padding16dp))
 
+            // избранное
+            Text(
+                text = stringResource(com.example.feature_favorites.R.string.favorite),
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Spacer(modifier = Modifier.height(Dimens.padding4dp))
+
+            // кол-во вакансий
+            Text(
+                text = getVacanciesText(vacancies.size),
+                color = MaterialTheme.colorScheme.inversePrimary,
+                style = MaterialTheme.typography.labelMedium
+            )
+
+            // избранные вакансии
             LazyColumn(
                 modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Dimens.padding8dp)
             ) {

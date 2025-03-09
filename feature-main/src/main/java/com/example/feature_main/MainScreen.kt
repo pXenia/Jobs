@@ -113,13 +113,16 @@ fun MainScreen(
                         experience = vacancy.experience.previewText,
                         datePublication = vacancy.publishedDate,
                         isFavourite = vacancy.isFavorite,
-                        onClickFavourite = {viewModel.changeFavorites(vacancy)},
+                        onClickFavourite = { viewModel.changeFavorites(vacancy) },
                         onCardClick = {}
                     )
                 }
             }
 
-            LoadMoreButton(amount = vacancies.size, onClick = onClick)
+            LoadMoreButton(
+                amount = if (vacancies.size > 0) vacancies.size - 3 else vacancies.size,
+                onClick = onClick
+            )
         }
     }
 }

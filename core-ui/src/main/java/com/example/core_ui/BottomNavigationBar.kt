@@ -21,16 +21,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.core_ui.tools.Dimens
 
 
 @Composable
-fun BottomNavigationBar(selectedItem: Int, onItemSelected: (Int) -> Unit) {
+fun BottomNavigationBar(
+    selectedItem: Int,
+    showBadge: Boolean = false,
+    numberFavourites: Int = 1,
+    onItemSelected: (Int) -> Unit) {
     Column {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background)
-                .padding(6.dp),
+                .padding(Dimens.padding6dp),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -44,11 +49,13 @@ fun BottomNavigationBar(selectedItem: Int, onItemSelected: (Int) -> Unit) {
                 BottomNavItem(
                     iconId = icon,
                     label = label,
-                    isSelected = selectedItem == index
+                    isSelected = selectedItem == index,
+                    showBadge = showBadge && index == 1,
+                    numberFavourites = numberFavourites
                 ) { onItemSelected(index) }
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Dimens.padding16dp))
     }
 }
 
@@ -65,7 +72,7 @@ fun BottomNavItem(
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Box(modifier = Modifier
-            .padding(bottom = 3.dp)
+            .padding(bottom = Dimens.padding4dp)
             .clickable { onClick() }
         ) {
             Icon(
@@ -78,7 +85,7 @@ fun BottomNavItem(
             if (showBadge) {
                 Box(
                     modifier = Modifier
-                        .padding(top = 2.dp, start = 16.dp)
+                        .padding(top = Dimens.padding2dp, start = Dimens.padding16dp)
                         .size(13.dp)
                         .background(MaterialTheme.colorScheme.error, shape = CircleShape)
                         .align(Alignment.TopEnd),

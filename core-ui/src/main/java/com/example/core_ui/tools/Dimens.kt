@@ -4,13 +4,16 @@ import androidx.compose.ui.unit.dp
 
 object Dimens {
     // Отступы
+    val padding2dp = 2.dp
     val padding4dp = 4.dp
+    val padding6dp = 6.dp
     val padding7dp = 7.dp
     val padding8dp = 8.dp
     val padding10dp = 10.dp
     val padding16dp = 16.dp
     val padding32dp = 32.dp
     val padding48dp = 48.dp
+    val padding64dp = 64.dp
 
     // Радиусы скругления
     val cornerRadius8dp = 8.dp
