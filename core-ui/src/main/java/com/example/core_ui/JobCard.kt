@@ -19,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,13 +40,16 @@ fun JobCard(
     datePublication: String,
     isFavourite: Boolean,
     onClickFavourite: () -> Unit,
+    onCardClick: () -> Unit
 ) {
     Card(
-        modifier = modifier, shape = RoundedCornerShape(Dimens.cornerRadius8dp)
+        modifier = modifier
+            .clickable { onCardClick() },
+        shape = RoundedCornerShape(Dimens.cornerRadius8dp)
     ) {
         Column(
             modifier = Modifier.padding(Dimens.padding16dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(Dimens.padding10dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -69,7 +73,7 @@ fun JobCard(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.secondary
                 ),
-                contentPadding = PaddingValues(7.dp)
+                contentPadding = PaddingValues(Dimens.padding7dp)
             ) {
                 Text(
                     text = stringResource(R.string.respond),
@@ -117,7 +121,7 @@ private fun JobInfo(
     datePublication: String
 ) {
     Column(
-        modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp)
+        modifier = modifier, verticalArrangement = Arrangement.spacedBy(Dimens.padding10dp)
     ) {
         // сколько просматривает
         if (numberViewers != null) Text(
@@ -143,7 +147,7 @@ private fun JobInfo(
 
         // требуемый опыт
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.padding8dp)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_experience_default),
@@ -179,8 +183,10 @@ private fun CompanyAddress(
 
         Spacer(modifier = Modifier.height(Dimens.padding4dp))
 
-        Row {
-            // название вакансии
+        Row(
+            verticalAlignment = Alignment.Bottom
+        ) {
+            // название компании
             Text(
                 text = company, style = MaterialTheme.typography.bodyMedium
             )

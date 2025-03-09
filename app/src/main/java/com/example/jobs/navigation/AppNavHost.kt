@@ -14,10 +14,16 @@ fun AppNavHost(
     navController: NavHostController,
 ) {
     NavHost(
-        navController = navController,
-        startDestination = Screen.MainScreen.route
+        navController = navController, startDestination = Screen.MainScreen.route
     ) {
-        composable(Screen.MainScreen.route) { MainDetailsScreen() }
+        composable(Screen.MainScreen.route) {
+            MainScreen {
+                navController.navigate(Screen.MainDetailsScreen.route)
+            }
+        }
+        composable(Screen.MainDetailsScreen.route) {
+            MainDetailsScreen(navController = navController)
+        }
         composable(Screen.FavoritesScreen.route) { FavoritesScreen() }
         composable(Screen.ResponsesScreen.route) { ResponsesScreen() }
         composable(Screen.MessagesScreen.route) { MessagesScreen() }
@@ -37,7 +43,7 @@ fun getSelectedIndex(route: String?): Int {
     }
 }
 
-fun navigateToScreen(index: Int, navController: NavController){
+fun navigateToScreen(index: Int, navController: NavController) {
     val route = when (index) {
         0 -> Screen.MainScreen.route
         1 -> Screen.FavoritesScreen.route

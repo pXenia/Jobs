@@ -10,7 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -20,62 +23,74 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.core_network.model.Button
 import com.example.core_ui.JobCard
 import com.example.core_ui.RecommendationCard
 import com.example.core_ui.Search
+import com.example.core_ui.tools.Dimens
+import com.example.core_ui.tools.getVacanciesText
 
 
-@Preview(showSystemUi = true)
 @Composable
-fun MainScreen(viewModel: MainScreenViewModel = hiltViewModel()
+fun MainScreen(
+    viewModel: MainScreenViewModel = hiltViewModel(),
+    onClick: () -> Unit
 ) {
     val vacancies by viewModel.vacancies.collectAsState()
+    val offers by viewModel.offers.collectAsState()
 
     Surface(
         color = MaterialTheme.colorScheme.background
     ) {
-        Spacer(modifier = Modifier.height(32.dp))
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(Dimens.padding16dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(Dimens.padding16dp)
         ) {
 
+            // строка поиска и настройки
             Search(
                 iconSettings = com.example.core_ui.R.drawable.ic_filter_default,
-                iconSearch = com.example.core_ui.R.drawable.ic_search_default
+                iconSearch = com.example.core_ui.R.drawable.ic_search_default,
+                onClick = {}
             )
 
+            // рекомендации
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(Dimens.padding8dp)
             ) {
-                items(3) {
+                itemsIndexed(items = offers) { index, offer ->
                     RecommendationCard(
-                        title = "ffkfkf",
-                        icon = com.example.core_ui.R.drawable.ic_location_default
-                    ) { }
+                        id = index,
+                        title = offer.title,
+                        link = offer.link,
+                        buttonText = offer.button?.text
+                    )
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.padding16dp))
 
+            // вакансии для вас
             Text(
-                text = "Вакансии для вас",
+                text = stringResource(R.string.vacancies_for_you),
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = MaterialTheme.typography.titleMedium
             )
 
-            LazyColumn(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+            // 3 вакансии
+            Column(
+                verticalArrangement = Arrangement.spacedBy(Dimens.padding16dp)
             ) {
-                items(items = vacancies, key = { it.id }) { vacancy ->
+                vacancies.take(3).forEach { vacancy ->
                     JobCard(
                         modifier = Modifier,
                         numberViewers = vacancy.lookingNumber,
@@ -85,32 +100,37 @@ fun MainScreen(viewModel: MainScreenViewModel = hiltViewModel()
                         company = vacancy.company,
                         experience = vacancy.experience.previewText,
                         datePublication = vacancy.publishedDate,
-                        isFavourite = vacancy.isFavorite
-                    ){
-
-                    }
+                        isFavourite = vacancy.isFavorite,
+                        onClickFavourite = {},
+                        onCardClick = {}
+                    )
                 }
             }
 
-            LoadMoreButton()
-
+            LoadMoreButton(amount = vacancies.size, onClick = onClick)
         }
     }
 }
 
 
 @Composable
-fun LoadMoreButton() {
+fun LoadMoreButton(
+    amount: Int, onClick: () -> Unit
+) {
     Button(
-        onClick = { },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(Dimens.cornerRadius8dp),
         colors = ButtonDefaults.buttonColors(
             MaterialTheme.colorScheme.onSecondaryContainer
         )
     ) {
-        Text(text = "Еще 143 вакансии", color = MaterialTheme.colorScheme.onPrimary)
+        Text(
+            text = "Ещё ${getVacanciesText(amount)}",
+            color = MaterialTheme.colorScheme.onPrimary,
+            style = MaterialTheme.typography.labelLarge
+        )
     }
 }

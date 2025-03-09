@@ -44,7 +44,8 @@ fun FavoritesScreen() {
 
             Search(
                 iconSettings = R.drawable.ic_filter_default,
-                iconSearch = R.drawable.ic_search_default
+                iconSearch = R.drawable.ic_search_default,
+                onClick = {}
             )
 
             FavoritesSort()

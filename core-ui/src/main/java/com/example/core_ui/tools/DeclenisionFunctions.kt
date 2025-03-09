@@ -21,3 +21,11 @@ fun getPublishedDateText(publishedDate: String): String {
     val monthText = months.getOrNull(month - 1) ?: ""
     return "Опубликовано $day $monthText"
 }
+
+fun getVacanciesText(amount: Int): String {
+    return when {
+        amount % 10 == 1 && amount % 100 != 11 -> "$amount вакансия"
+        amount % 10 in 2..4 && amount % 100 !in 12..14 -> "$amount вакансии"
+        else -> "$amount вакансий"
+    }
+}

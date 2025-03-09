@@ -1,5 +1,6 @@
 package com.example.core_ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -23,7 +24,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SearchBar(
     modifier: Modifier,
-    icon: Int
+    icon: Int,
+    onClick: () -> Unit = {}
 ) {
     var text by remember { mutableStateOf("") }
 
@@ -42,6 +44,7 @@ fun SearchBar(
             Icon(
                 painter = painterResource(icon),
                 contentDescription = "",
+                modifier = Modifier.clickable { onClick() }
             )
         },
         shape = RoundedCornerShape(8.dp),
