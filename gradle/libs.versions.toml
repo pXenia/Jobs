@@ -18,6 +18,8 @@ hiltAndroid = "2.51.1"
 converterMoshi = "2.4.0"
 kotlinKsp = "2.1.10-1.0.30"
 hiltNavigationCompose = "1.2.0"
+roomKtx = "2.6.1"
+
 
 
 [libraries]
@@ -46,6 +48,8 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtx" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

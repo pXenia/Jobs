@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core_network"
+    namespace = "com.example.core_db"
     compileSdk = 35
 
     defaultConfig {
@@ -43,14 +43,12 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // для загрузки данных
-    implementation(libs.retrofit)
-    implementation(libs.moshi.kotlin)
-    implementation(libs.converter.moshi)
+    // Room
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.dagger.compiler)
     ksp(libs.hilt.compiler)
-
 }
