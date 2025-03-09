@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -24,9 +26,10 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun JobCard(
     modifier: Modifier = Modifier,
-    numberViewers: String,
+    numberViewers: Int?,
     jobTitle: String,
-    cities: List<String>,
+    city: String,
+    company: String,
     experience: String,
     datePublication: String,
     isFavourite: Boolean,
@@ -43,7 +46,7 @@ fun JobCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                JobInfo(numberViewers, jobTitle, cities, experience, datePublication)
+                JobInfo(numberViewers.toString(), jobTitle, city, company, experience, datePublication)
                 Icon(
                     painter = if (isFavourite) painterResource(id = R.drawable.ic_heart_active)
                     else painterResource(
@@ -74,7 +77,8 @@ fun JobCard(
 private fun JobInfo(
     numberViewers: String,
     jobTitle: String,
-    cities: List<String>,
+    city: String,
+    company: String,
     experience: String,
     datePublication: String
 ) {
@@ -95,12 +99,20 @@ private fun JobInfo(
         Column(
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            cities.forEach { city ->
+
+            Text(
+                text = city,
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            Row {
                 Text(
-                    text = city,
+                    text = company,
                     style = MaterialTheme.typography.bodyMedium
                 )
+                Spacer(modifier = Modifier.width(10.dp))
             }
+
         }
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -122,18 +134,18 @@ private fun JobInfo(
     }
 }
 
-@Preview
-@Composable
-fun JobCardPreview() {
-    JobCard(
-        modifier = Modifier,
-        numberViewers = "Сейчас просматривает 1 человек",
-        jobTitle = "UI/UX Designer",
-        cities = listOf("Минск", "Мобирикс"),
-        experience = "Опыт от 1 года до 3 лет",
-        datePublication = "Опубликовано 20 февраля",
-        isFavourite = true
-    )
-}
+//@Preview
+//@Composable
+//fun JobCardPreview() {
+//    JobCard(
+//        modifier = Modifier,
+//        numberViewers = "Сейчас просматривает 1 человек",
+//        jobTitle = "UI/UX Designer",
+//        cities = listOf("Минск", "Мобирикс"),
+//        experience = "Опыт от 1 года до 3 лет",
+//        datePublication = "Опубликовано 20 февраля",
+//        isFavourite = true
+//    )
+//}
 
 

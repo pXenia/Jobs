@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.feature_favorites.FavoritesScreen
+import com.example.feature_main.MainDetailsScreen
 import com.example.feature_main.MainScreen
 
 @Composable
@@ -16,7 +17,7 @@ fun AppNavHost(
         navController = navController,
         startDestination = Screen.MainScreen.route
     ) {
-        composable(Screen.MainScreen.route) { MainScreen() }
+        composable(Screen.MainScreen.route) { MainDetailsScreen() }
         composable(Screen.FavoritesScreen.route) { FavoritesScreen() }
         composable(Screen.ResponsesScreen.route) { ResponsesScreen() }
         composable(Screen.MessagesScreen.route) { MessagesScreen() }
