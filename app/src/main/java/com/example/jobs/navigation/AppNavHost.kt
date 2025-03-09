@@ -54,10 +54,10 @@ fun navigateToScreen(index: Int, navController: NavController) {
     }
     navController.navigate(route) {
         popUpTo(navController.graph.startDestinationId) {
-            saveState = true
+            saveState = false
         }
         launchSingleTop = true
-        restoreState = true
+        restoreState = false
     }
 }
 

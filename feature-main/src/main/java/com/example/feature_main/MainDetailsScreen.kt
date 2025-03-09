@@ -16,13 +16,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import com.example.core_ui.JobCard
 import com.example.core_ui.R
@@ -36,6 +40,13 @@ fun MainDetailsScreen(
     viewModel: MainScreenViewModel = hiltViewModel(),
     navController: NavController
 ) {
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewModel.compareWithDatabase()
+        }
+    }
 
     val vacancies by viewModel.vacancies.collectAsState()
 
@@ -80,7 +91,7 @@ fun MainDetailsScreen(
                         experience = vacancy.experience.previewText,
                         datePublication = vacancy.publishedDate,
                         isFavourite = vacancy.isFavorite,
-                        onClickFavourite = {},
+                        onClickFavourite = {viewModel.changeFavorites(vacancy)},
                         onCardClick = {})
                 }
             }

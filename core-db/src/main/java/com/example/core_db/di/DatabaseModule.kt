@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.core_db.VacancyDB
 import com.example.core_db.VacancyDao
-import com.example.core_db.repository.VacancyRepository
+import com.example.core_db.repository.FavoriteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +33,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideVacancyRepository(dao: VacancyDao): VacancyRepository {
-        return VacancyRepository(dao)
+    fun provideVacancyRepository(dao: VacancyDao): FavoriteRepository {
+        return FavoriteRepository(dao)
     }
 }
