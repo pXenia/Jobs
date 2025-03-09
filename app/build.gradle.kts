@@ -74,4 +74,7 @@ dependencies {
 
     //Для управлнеия системной панелью
     implementation (libs.accompanist.systemuicontroller)
+
+    //Для навигации
+    implementation (libs.androidx.navigation.compose)
 }

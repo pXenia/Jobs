@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,43 +25,34 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BottomNavigationBar(selectedItem: Int, onItemSelected: (Int) -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp)
-            .background(MaterialTheme.colorScheme.background)
-            .padding(vertical = 6.dp),
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        BottomNavItem(
-            iconId = R.drawable.ic_search_default,
-            label = "Поиск",
-            isSelected = selectedItem == 0
-        ) { onItemSelected(0) }
-        BottomNavItem(
-            iconId = R.drawable.ic_heart_default,
-            label = "Избранное",
-            isSelected = selectedItem == 1,
-            showBadge = true
-        ) { onItemSelected(1) }
-        BottomNavItem(
-            iconId = R.drawable.ic_responses_default,
-            label = "Отклики",
-            isSelected = selectedItem == 2
-        ) { onItemSelected(2) }
-        BottomNavItem(
-            iconId = R.drawable.ic_message_default,
-            label = "Сообщения",
-            isSelected = selectedItem == 3
-        ) { onItemSelected(3) }
-        BottomNavItem(
-            iconId = R.drawable.ic_user_default,
-            label = "Профиль",
-            isSelected = selectedItem == 4
-        ) { onItemSelected(4) }
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(6.dp),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            listOf(
+                R.drawable.ic_search_default to "Поиск",
+                R.drawable.ic_heart_default to "Избранное",
+                R.drawable.ic_responses_default to "Отклики",
+                R.drawable.ic_message_default to "Сообщения",
+                R.drawable.ic_user_default to "Профиль"
+            ).forEachIndexed { index, (icon, label) ->
+                BottomNavItem(
+                    iconId = icon,
+                    label = label,
+                    isSelected = selectedItem == index
+                ) { onItemSelected(index) }
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
+
+
 
 @Composable
 fun BottomNavItem(
@@ -91,7 +83,7 @@ fun BottomNavItem(
                         .background(MaterialTheme.colorScheme.error, shape = CircleShape)
                         .align(Alignment.TopEnd),
                     contentAlignment = Alignment.Center
-                ){
+                ) {
                     Text(
                         text = numberFavourites.toString(),
                         style = MaterialTheme.typography.displaySmall,
@@ -109,8 +101,3 @@ fun BottomNavItem(
     }
 }
 
-@Preview
-@Composable
-fun BottomNavigationBarPreview() {
-    BottomNavigationBar(1) {}
-}

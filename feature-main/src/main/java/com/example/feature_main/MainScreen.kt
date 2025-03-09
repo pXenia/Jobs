@@ -93,10 +93,6 @@ fun MainScreen() {
 
             LoadMoreButton()
 
-            BottomNavigationBar(
-                selectedItem = 0,
-                onItemSelected = {}
-            )
         }
     }
 }

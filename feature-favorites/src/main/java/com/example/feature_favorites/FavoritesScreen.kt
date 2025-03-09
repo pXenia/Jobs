@@ -67,11 +67,6 @@ fun FavoritesScreen() {
                     )
                 }
             }
-
-            BottomNavigationBar(
-                selectedItem = 0,
-                onItemSelected = {}
-            )
         }
     }
 }
