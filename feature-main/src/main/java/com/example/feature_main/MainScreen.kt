@@ -80,12 +80,15 @@ fun MainScreen(viewModel: MainScreenViewModel = hiltViewModel()
                         modifier = Modifier,
                         numberViewers = vacancy.lookingNumber,
                         jobTitle = vacancy.title,
+                        salary = vacancy.salary?.full,
                         city = vacancy.address.town,
                         company = vacancy.company,
                         experience = vacancy.experience.previewText,
                         datePublication = vacancy.publishedDate,
                         isFavourite = vacancy.isFavorite
-                    )
+                    ){
+
+                    }
                 }
             }
 
